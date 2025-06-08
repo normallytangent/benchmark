@@ -34,8 +34,9 @@ int main() {
   #endif
 
   #if defined (USEKOKKOS)
+  using ExecSpace = Kokkos::DefaultExecutionSpace;
   Kokkos::initialize();
-    auto pmin = bench_kokkos_min_element<Kokkos::Cuda, int>(N, NTIMES);
+    auto pmin = bench_kokkos_min_element<ExecSpace, int>(N, NTIMES);
   Kokkos::finalize();
   #endif
 
