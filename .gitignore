@@ -1,3 +1,4 @@
 # CMake out-of-source
 build*/
+*build/
 *-build-*/
