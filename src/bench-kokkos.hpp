@@ -1,11 +1,12 @@
 /***********************
  * Benchmarking Kokkos *
 ************************/
+
 #include <Kokkos_Core.hpp>
 #include <Kokkos_StdAlgorithms.hpp>
 
 template<class ExecSpace, typename T>
-std::pair<double, double> bench_kokkos_min_element(int N, int NTIMES) {
+std::vector<double> bench_kokkos(int N, int NTIMES) {
 
   namespace KE = Kokkos::Experimental;
 
@@ -13,33 +14,38 @@ std::pair<double, double> bench_kokkos_min_element(int N, int NTIMES) {
   using ViewType = Kokkos::View<T*, MemSpace>;
 
   ViewType data( "data", N );
-  auto gen = [N](int i){return (i > 10 ? i : N-i);};
+  auto gen = [N](T i){return (i > 10 ? i : N-i);}; //CHANGEME
   Kokkos::parallel_for("fill", N, KOKKOS_LAMBDA(const int & i) {
     data(i) = gen(i);
   });
 
-  auto host_data = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), data);
+  std::ofstream file;
+  file.open("../cuda.txt", std::ios::out | std::ios::app);
+  file << "\n# Kokkos: KE::min_element"; //CHANGEME
+  file.close();
+
+  auto myLambda = [=]() {
+    return KE::min_element(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
+  };
 
   // cache warm-up
-  auto res = KE::min_element(ExecSpace(), KE::begin(data), KE::end(data));
+  auto res = myLambda();
 
   std::vector<double> time_vector;
   for (std::size_t k = 0; k < NTIMES; ++k) {
     auto start = get_time_now();
-    res = KE::min_element(ExecSpace(), KE::begin(data), KE::end(data));
+    res = myLambda();
     auto end = get_time_now();
 
     time_vector.push_back((end - start) * 1e-9);
   }
 
-  double duration = * std::min_element(time_vector.begin(), time_vector.end());
-  double GBytes = (double (N) * sizeof(int)) * 1.0e-9;
-  double bandwidth = ( GBytes ) / duration;
-
+#ifdef VERIFY
+  auto host_data = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), data);
   auto dist_to_res = KE::distance(KE::begin(data), res);
-  std::cout << "# Kokkos: std::min_element";
   std::cout << "\n# Verification: " << *(KE::begin(host_data) + dist_to_res)
             << ", at: " << dist_to_res;
+#endif
 
-  return std::make_pair(GBytes, bandwidth);
+  return time_vector;
 }

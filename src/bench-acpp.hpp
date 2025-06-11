@@ -1,20 +1,28 @@
 /****************************
  * Benchmarking AdaptiveCpp *
 *****************************/
-#include "CustomIterator.hpp"
 
-template <typename T>
-std::pair<double, double> bench_acpp_min_element(int N, int NTIMES) {
-  auto pol = std::execution::par_unseq;
+template <typename T, class Policy>
+std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES) {
 
   T* data = new T[N];
   auto gen = [data, N](T idx) {
-    data[idx] = (idx > 10) ? idx : N - idx;
+    data[idx] = (idx > 10) ? idx : N - idx; //CHANGEME
   };
 
   std::vector<std::size_t> indices(N);
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
+
+  std::ofstream file;
+  file.open("cuda.txt", std::ios::out | std::ios::app);
+  file << "\n# AdaptiveCpp: std::min_element"; //CHANGEME
+  file.close();
+
+  auto myLambda = [=]() {
+    // auto comp = std::less<>{};
+    return std::min_element(pol, data, data + N); //CHANGEME
+  };
 
   // Aksel:
   // A better, but more complex solution is to use
@@ -28,25 +36,23 @@ std::pair<double, double> bench_acpp_min_element(int N, int NTIMES) {
   // std::for_each(pol, CustomIterator<T>{0, N}.begin(),
   //               CustomIterator<T>{0, N}.end(), gen);
 
-  auto comp = std::less<>{};
   // cache warm-up
-  auto res = std::min_element(pol, data, data + N);
+  auto res = myLambda();
 
   std::vector<double> time_vector;
   for (std::size_t k = 0; k < NTIMES; ++k) {
     auto start = get_time_now();
-    res = std::min_element(pol, data, data + N);
+    res = myLambda();
     auto end = get_time_now();
     time_vector.push_back((end - start) * 1e-9);
   }
 
-  double duration = * std::min_element(time_vector.begin(), time_vector.end());
-  double GBytes = (double (N) * sizeof(int)) * 1.0e-9;
-  double bandwidth = ( GBytes ) / duration; // Note the changed bw since we measure
-                                            // the minimum duration instead of avg.
+#ifdef VERIFY
+  std::cout << "\n# Verification: " << *res
+            << ", at:  " << std::distance(data, res);
+#endif
 
-  std::cout << "# AdaptiveCpp: std::min_element";
-  std::cout << "\n# Verification: " << *res << ", at:  " << std::distance(data, res);
   delete[] data;
-  return std::make_pair(GBytes, bandwidth);
+
+  return time_vector;
 }
