@@ -14,18 +14,18 @@ std::vector<double> bench_kokkos(int N, int NTIMES) {
   using ViewType = Kokkos::View<T*, MemSpace>;
 
   ViewType data( "data", N );
-  auto gen = [N](T i){return (i > 10 ? i : N-i);}; //CHANGEME
+  auto gen = [N](T i){return (i <= 10 ? i : N-i);}; //CHANGEME
   Kokkos::parallel_for("fill", N, KOKKOS_LAMBDA(const int & i) {
     data(i) = gen(i);
   });
 
   std::ofstream file;
   file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
-  file << "\n# Kokkos: KE::min_element"; //CHANGEME
+  file << "\n# Kokkos: KE::max_element"; //CHANGEME
   file.close();
 
   auto myLambda = [=]() {
-    return KE::min_element(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
+    return KE::max_element(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
   };
 
   // cache warm-up
