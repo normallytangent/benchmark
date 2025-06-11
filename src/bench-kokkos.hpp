@@ -21,11 +21,11 @@ std::vector<double> bench_kokkos(int N, int NTIMES) {
 
   std::ofstream file;
   file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
-  file << "\n# Kokkos: KE::is_sorted"; //CHANGEME
+  file << "\n# Kokkos: KE::remove_if"; //CHANGEME
   file.close();
 
   auto myLambda = [=]() {
-    return KE::is_sorted(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
+    return KE::remove_if(ExecSpace(), KE::begin(data), KE::end(data), [](T x){return x == 42;}); //CHANGEME
   };
 
   // cache warm-up
