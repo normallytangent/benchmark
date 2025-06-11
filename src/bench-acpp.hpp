@@ -15,7 +15,7 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES) {
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
   std::ofstream file;
-  file.open("cuda.txt", std::ios::out | std::ios::app);
+  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# AdaptiveCpp: std::min_element"; //CHANGEME
   file.close();
 

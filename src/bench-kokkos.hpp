@@ -20,7 +20,7 @@ std::vector<double> bench_kokkos(int N, int NTIMES) {
   });
 
   std::ofstream file;
-  file.open("../cuda.txt", std::ios::out | std::ios::app);
+  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# Kokkos: KE::min_element"; //CHANGEME
   file.close();
 

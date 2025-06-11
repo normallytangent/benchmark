@@ -50,7 +50,7 @@ int main() {
   double bandwidth = ( GBytes ) / duration;
 
   std::ofstream file;
-  file.open("cuda.txt", std::ios::out | std::ios::app);
+  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# memory (MB)" << " bandwidth (GB/s)\n  "
        << GBytes * 1000 << "      " << bandwidth << std::endl;
   file.close();
