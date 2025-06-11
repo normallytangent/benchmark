@@ -16,12 +16,12 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES) {
 
   std::ofstream file;
   file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
-  file << "\n# AdaptiveCpp: std::max_element"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::is_sorted_until"; //CHANGEME
   file.close();
 
   auto myLambda = [=]() {
     // auto comp = std::less<>{};
-    return std::max_element(pol, data, data + N); //CHANGEME
+    return std::is_sorted_until(pol, data, data + N); //CHANGEME
   };
 
   // Aksel:
