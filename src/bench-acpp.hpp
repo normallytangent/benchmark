@@ -6,6 +6,7 @@ template <typename T, class Policy>
 std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& file) {
 
   T* data = new T[N];
+  T* data2 = new T[N];
   auto gen = [=](T idx) {
     data[idx] = idx; //(idx > (int)N/2) ? idx : N - idx; //CHANGEME
   };
@@ -14,10 +15,10 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::remove"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::remove_copy"; //CHANGEME
 
   auto myLambda = [=]() {
-    return std::remove(pol, data, data + N, 4200000); //CHANGEME
+    return std::remove_copy(pol, data, data + N, data2, 4200000); //CHANGEME
   };
 
   // Aksel:
@@ -44,8 +45,9 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   }
 
 #ifdef VERIFY
-  std::cout << "\n# Verification: " << *--res
-            << ", at:  " << std::distance(data, --res);
+  std::cout << "\n# Verification: " << *(res-1)
+            << ", at:  " << std::distance(data2, res-1)
+	    << std::endl;
 #endif
 
   delete[] data;
