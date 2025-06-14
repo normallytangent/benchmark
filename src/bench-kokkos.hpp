@@ -14,15 +14,15 @@ std::vector<double> bench_kokkos(int N, int NTIMES, std::ofstream& file) {
   using ViewType = Kokkos::View<T*, MemSpace>;
 
   ViewType data( "data", N );
-  auto gen = [N](T i){return (i <= 10 ? i : N-i);}; //CHANGEME
+  auto gen = [N](T i){return i;}; //(i <= 10 ? i : N-i);}; //CHANGEME
   Kokkos::parallel_for("fill", N, KOKKOS_LAMBDA(const int & i) {
     data(i) = gen(i);
   });
 
-  file << "\n# Kokkos: KE::remove_if"; //CHANGEME
+  file << "\n# Kokkos: KE::is_sorted worst-case is-index"; //CHANGEME
 
   auto myLambda = [=]() {
-    return KE::remove_if(ExecSpace(), KE::begin(data), KE::end(data), [](T x){return x == 42;}); //CHANGEME
+    return KE::is_sorted(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
   };
 
   // cache warm-up

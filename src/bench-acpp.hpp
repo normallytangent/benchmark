@@ -7,18 +7,17 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
 
   T* data = new T[N];
   auto gen = [data, N](T idx) {
-    data[idx] = (idx <= 10) ? idx : N - idx; //CHANGEME
+    data[idx] = idx; //(idx < (int)N/2) ? idx : N - idx; //CHANGEME
   };
 
   std::vector<std::size_t> indices(N);
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::remove_if"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::is_sorted worst-case is-index"; //CHANGEME
 
   auto myLambda = [=]() {
-    // auto comp = std::less<>{};
-    return std::remove_if(pol, data, data + N, [](T x){return x == 42;}); //CHANGEME
+    return std::is_sorted(pol, data, data + N); //CHANGEME
   };
 
   // Aksel:

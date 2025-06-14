@@ -32,7 +32,7 @@ int main() {
   // Vector size should be 3.8 times the cache = 83,6MB and total memory req = ?
   int N = 70e6; // 10e6 elements to fill one node.
   int NTIMES = 100;
-  std::ofstream file("/home/sanchi/data/cuda.txt", std::ios::out | std::ios::app);
+  std::ofstream file("/home/sanchi/data/hip.txt", std::ios::out | std::ios::app);
 
   #if defined (USEACPP)
   auto pol = std::execution::par_unseq;
