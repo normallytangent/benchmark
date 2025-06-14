@@ -122,3 +122,11 @@
 # AdaptiveCpp: std::remove_copy
 # memory (MB) bandwidth (GB/s)
   280      64.9688
+
+# AdaptiveCpp: std::find
+# memory (MB) bandwidth (GB/s)
+  280      309.506
+
+# AdaptiveCpp: std::find
+# memory (MB) bandwidth (GB/s)
+  280      309.329
