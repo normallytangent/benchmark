@@ -3,7 +3,7 @@
 *****************************/
 
 template <typename T, class Policy>
-std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES) {
+std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& file) {
 
   T* data = new T[N];
   auto gen = [data, N](T idx) {
@@ -14,10 +14,7 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES) {
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  std::ofstream file;
-  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# AdaptiveCpp: std::remove_if"; //CHANGEME
-  file.close();
 
   auto myLambda = [=]() {
     // auto comp = std::less<>{};

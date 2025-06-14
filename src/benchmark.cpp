@@ -32,16 +32,17 @@ int main() {
   // Vector size should be 3.8 times the cache = 83,6MB and total memory req = ?
   int N = 70e6; // 10e6 elements to fill one node.
   int NTIMES = 100;
+  std::ofstream file("/home/sanchi/data/cuda.txt", std::ios::out | std::ios::app);
 
   #if defined (USEACPP)
   auto pol = std::execution::par_unseq;
-  auto time_vector = bench_acpp<int>(pol, N, NTIMES);
+  auto time_vector = bench_acpp<int>(pol, N, NTIMES, file);
   #endif
 
   #if defined (USEKOKKOS)
   using ExecSpace = Kokkos::DefaultExecutionSpace;
   Kokkos::initialize();
-    auto time_vector = bench_kokkos<ExecSpace, int>(N, NTIMES);
+    auto time_vector = bench_kokkos<ExecSpace, int>(N, NTIMES, file);
   Kokkos::finalize();
   #endif
 
@@ -49,8 +50,6 @@ int main() {
   double GBytes = (double (N) * sizeof(int)) * 1.0e-9;
   double bandwidth = ( GBytes ) / duration;
 
-  std::ofstream file;
-  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# memory (MB)" << " bandwidth (GB/s)\n  "
        << GBytes * 1000 << "      " << bandwidth << std::endl;
   file.close();

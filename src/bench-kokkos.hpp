@@ -6,7 +6,7 @@
 #include <Kokkos_StdAlgorithms.hpp>
 
 template<class ExecSpace, typename T>
-std::vector<double> bench_kokkos(int N, int NTIMES) {
+std::vector<double> bench_kokkos(int N, int NTIMES, std::ofstream& file) {
 
   namespace KE = Kokkos::Experimental;
 
@@ -19,10 +19,7 @@ std::vector<double> bench_kokkos(int N, int NTIMES) {
     data(i) = gen(i);
   });
 
-  std::ofstream file;
-  file.open("/root/bench/cuda.txt", std::ios::out | std::ios::app);
   file << "\n# Kokkos: KE::remove_if"; //CHANGEME
-  file.close();
 
   auto myLambda = [=]() {
     return KE::remove_if(ExecSpace(), KE::begin(data), KE::end(data), [](T x){return x == 42;}); //CHANGEME
