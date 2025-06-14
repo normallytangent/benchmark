@@ -6,18 +6,20 @@ template <typename T, class Policy>
 std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& file) {
 
   T* data = new T[N];
-  auto gen = [data, N](T idx) {
-    data[idx] = idx; //(idx < (int)N/2) ? idx : N - idx; //CHANGEME
+  T* data2 = new T[N];
+  auto gen = [=](T idx) {
+    data[idx] = (idx < (int)N/2) ? idx : N - idx; //CHANGEME
+    data2[idx] = idx;
   };
 
   std::vector<std::size_t> indices(N);
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::is_sorted worst-case is-index"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::equal avg-case half-sorted"; //CHANGEME
 
   auto myLambda = [=]() {
-    return std::is_sorted(pol, data, data + N); //CHANGEME
+    return std::equal(pol, data, data + N, data2, data2 + N); //CHANGEME
   };
 
   // Aksel:
