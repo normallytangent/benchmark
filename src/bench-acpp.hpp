@@ -6,7 +6,6 @@ template <typename T, class Policy>
 std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& file) {
 
   T* data = new T[N];
-  T* data2 = new T[N];
   auto gen = [=](T idx) {
     data[idx] = idx; //(idx > (int)N/2) ? idx : N - idx; //CHANGEME
   };
@@ -15,10 +14,10 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::reverse_copy"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::remove"; //CHANGEME
 
   auto myLambda = [=]() {
-    std::reverse_copy(pol, data, data + N, data2); //CHANGEME
+    return std::remove(pol, data, data + N, 4200000); //CHANGEME
   };
 
   // Aksel:
@@ -34,19 +33,19 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   //               CustomIterator<T>{0, N}.end(), gen);
 
   // cache warm-up
-  myLambda();
+  auto res = myLambda();
 
   std::vector<double> time_vector;
   for (std::size_t k = 0; k < NTIMES; ++k) {
     auto start = get_time_now();
-    myLambda();
+    res = myLambda();
     auto end = get_time_now();
     time_vector.push_back((end - start) * 1e-9);
   }
 
 #ifdef VERIFY
-  std::cout << "\n# Verification: " << *res
-            << ", at:  " << std::distance(data, res);
+  std::cout << "\n# Verification: " << *--res
+            << ", at:  " << std::distance(data, --res);
 #endif
 
   delete[] data;
