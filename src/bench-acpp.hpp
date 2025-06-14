@@ -6,6 +6,7 @@ template <typename T, class Policy>
 std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& file) {
 
   T* data = new T[N];
+  T* data2 = new T[N];
   auto gen = [=](T idx) {
     data[idx] = idx; //(idx > (int)N/2) ? idx : N - idx; //CHANGEME
   };
@@ -14,10 +15,10 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::reverse"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::reverse_copy"; //CHANGEME
 
   auto myLambda = [=]() {
-    std::reverse(pol, data, data + N); //CHANGEME
+    std::reverse_copy(pol, data, data + N, data2); //CHANGEME
   };
 
   // Aksel:

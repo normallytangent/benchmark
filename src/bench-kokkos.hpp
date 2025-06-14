@@ -14,15 +14,16 @@ std::vector<double> bench_kokkos(int N, int NTIMES, std::ofstream& file) {
   using ViewType = Kokkos::View<T*, MemSpace>;
 
   ViewType data( "data", N );
+  ViewType data2( "data2", N );
   auto gen = [N](T i){return i;}; //(i > (int)N/2 ? i : N-i);}; //CHANGEME
   Kokkos::parallel_for("fill", N, KOKKOS_LAMBDA(const int & i) {
     data(i) = gen(i);
   });
 
-  file << "\n# Kokkos: KE::reverse"; //CHANGEME
+  file << "\n# Kokkos: KE::reverse_copy"; //CHANGEME
 
   auto myLambda = [=]() {
-    KE::reverse(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
+    KE::reverse_copy(ExecSpace(), KE::begin(data), KE::end(data), KE::begin(data2)); //CHANGEME
   };
 
   // cache warm-up
