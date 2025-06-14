@@ -1,0 +1,177 @@
+
+# AdaptiveCpp: std::is_sorted best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      3304.69
+
+# AdaptiveCpp: std::is_sorted best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      3304.03
+
+# AdaptiveCpp: std::is_sorted avg-case if-even
+# memory (MB) bandwidth (GB/s)
+  280      1018.93
+
+# AdaptiveCpp: std::is_sorted avg-case if-even
+# memory (MB) bandwidth (GB/s)
+  280      1018.64
+
+# AdaptiveCpp: std::is_sorted avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      1029
+
+# AdaptiveCpp: std::is_sorted avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      987.581
+
+# AdaptiveCpp: std::is_sorted worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      578.068
+
+# AdaptiveCpp: std::is_sorted worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      563.912
+
+# AdaptiveCpp: std::equal worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      344.413
+
+# AdaptiveCpp: std::equal worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      343.566
+
+
+# AdaptiveCpp: std::equal best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      2211.11
+
+# AdaptiveCpp: std::equal best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      2227.14
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      598.733
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      589.024
+
+# AdaptiveCpp: std::min_element
+# memory (MB) bandwidth (GB/s)
+  280      321.427
+
+# AdaptiveCpp: std::min_element
+# memory (MB) bandwidth (GB/s)
+  280      321.489
+
+# AdaptiveCpp: std::reverse
+# memory (MB) bandwidth (GB/s)
+  280      329.091
+
+# AdaptiveCpp: std::reverse
+# memory (MB) bandwidth (GB/s)
+  280      329.701
+
+# AdaptiveCpp: std::reverse_copy
+# memory (MB) bandwidth (GB/s)
+  280      342.259
+
+# AdaptiveCpp: std::reverse_copy
+# memory (MB) bandwidth (GB/s)
+  280      342.496
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.0592
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.1072
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.0809
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.0424
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.097
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.1086
+
+# AdaptiveCpp: std::remove
+# memory (MB) bandwidth (GB/s)
+  280      60.0861
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7012
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.6926
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.6523
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.6487
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7073
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      64.1493
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      64.1291
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7101
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.6789
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.706
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7159
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.6627
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7411
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      64.9731
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7101
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.725
+
+# AdaptiveCpp: std::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      72.7012
