@@ -7,17 +7,17 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
 
   T* data = new T[N];
   auto gen = [=](T idx) {
-    data[idx] = (idx > (int)N/2) ? idx : N - idx; //CHANGEME
+    data[idx] = idx; //(idx > (int)N/2) ? idx : N - idx; //CHANGEME
   };
 
   std::vector<std::size_t> indices(N);
   std::iota(indices.begin(), indices.end(), 0);
   std::for_each(pol, indices.begin(), indices.end(), gen);
 
-  file << "\n# AdaptiveCpp: std::min_element"; //CHANGEME
+  file << "\n# AdaptiveCpp: std::reverse"; //CHANGEME
 
   auto myLambda = [=]() {
-    return std::min_element(pol, data, data + N); //CHANGEME
+    std::reverse(pol, data, data + N); //CHANGEME
   };
 
   // Aksel:
@@ -33,12 +33,12 @@ std::vector<double> bench_acpp(Policy&& pol, int N, int NTIMES, std::ofstream& f
   //               CustomIterator<T>{0, N}.end(), gen);
 
   // cache warm-up
-  auto res = myLambda();
+  myLambda();
 
   std::vector<double> time_vector;
   for (std::size_t k = 0; k < NTIMES; ++k) {
     auto start = get_time_now();
-    res = myLambda();
+    myLambda();
     auto end = get_time_now();
     time_vector.push_back((end - start) * 1e-9);
   }

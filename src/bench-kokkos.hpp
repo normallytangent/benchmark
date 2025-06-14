@@ -14,24 +14,24 @@ std::vector<double> bench_kokkos(int N, int NTIMES, std::ofstream& file) {
   using ViewType = Kokkos::View<T*, MemSpace>;
 
   ViewType data( "data", N );
-  auto gen = [N](T i){return (i > (int)N/2 ? i : N-i);}; //CHANGEME
+  auto gen = [N](T i){return i;}; //(i > (int)N/2 ? i : N-i);}; //CHANGEME
   Kokkos::parallel_for("fill", N, KOKKOS_LAMBDA(const int & i) {
     data(i) = gen(i);
   });
 
-  file << "\n# Kokkos: KE::min_element"; //CHANGEME
+  file << "\n# Kokkos: KE::reverse"; //CHANGEME
 
   auto myLambda = [=]() {
-    return KE::min_element(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
+    KE::reverse(ExecSpace(), KE::begin(data), KE::end(data)); //CHANGEME
   };
 
   // cache warm-up
-  auto res = myLambda();
+  myLambda();
 
   std::vector<double> time_vector;
   for (std::size_t k = 0; k < NTIMES; ++k) {
     auto start = get_time_now();
-    res = myLambda();
+    myLambda();
     auto end = get_time_now();
 
     time_vector.push_back((end - start) * 1e-9);
