@@ -130,3 +130,151 @@
 # AdaptiveCpp: std::find
 # memory (MB) bandwidth (GB/s)
   280      309.329
+
+# Kokkos: KE::is_sorted worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      603.264
+
+# Kokkos: KE::is_sorted worst-case is-index
+# memory (MB) bandwidth (GB/s)
+  280      601.502
+
+# Kokkos: KE::is_sorted best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      595.313
+
+# Kokkos: KE::is_sorted best-case n-index
+# memory (MB) bandwidth (GB/s)
+  280      595.493
+
+# Kokkos: KE::is_sorted avg-case if-even
+# memory (MB) bandwidth (GB/s)
+  280      601.239
+
+# Kokkos: KE::is_sorted avg-case if-even
+# memory (MB) bandwidth (GB/s)
+  280      598.546
+
+# Kokkos: KE::is_sorted avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      603.564
+
+# Kokkos: KE::is_sorted avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      596.759
+
+# Kokkos: KE::equal avg-case half-sorted x2
+# memory (MB) bandwidth (GB/s)
+  280      341.037
+
+# Kokkos: KE::equal avg-case half-sorted x2
+# memory (MB) bandwidth (GB/s)
+  280      341.384
+
+# Kokkos: KE::equal worst-case is-index x2
+# memory (MB) bandwidth (GB/s)
+  280      341.63
+
+# Kokkos: KE::equal worst-case is-index x2
+# memory (MB) bandwidth (GB/s)
+  280      338.904
+
+# Kokkos: KE::equal best-case n-index x2
+# memory (MB) bandwidth (GB/s)
+  280      339.396
+
+# Kokkos: KE::equal best-case n-index x2
+# memory (MB) bandwidth (GB/s)
+  280      340.118
+
+# Kokkos: KE::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      642.803
+
+# Kokkos: KE::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      644.809
+
+# Kokkos: KE::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  560      680.055
+
+# Kokkos: KE::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  560      682.276
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      1026.66
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  280      1024.37
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  560      1089.6
+
+# AdaptiveCpp: std::equal avg-case half-sorted
+# memory (MB) bandwidth (GB/s)
+  560      1088.92
+
+# Kokkos: KE::min_element
+# memory (MB) bandwidth (GB/s)
+  280      609.917
+
+# Kokkos: KE::min_element
+# memory (MB) bandwidth (GB/s)
+  280      625.229
+
+# Kokkos: KE::min_element
+# memory (MB) bandwidth (GB/s)
+  280      626.25
+
+# Kokkos: KE::reverse
+# memory (MB) bandwidth (GB/s)
+  280      413.185
+
+# Kokkos: KE::reverse
+# memory (MB) bandwidth (GB/s)
+  280      413.276
+
+# Kokkos: KE::reverse_copy
+# memory (MB) bandwidth (GB/s)
+  280      341.251
+
+# Kokkos: KE::reverse_copy
+# memory (MB) bandwidth (GB/s)
+  280      341.408
+
+# Kokkos: KE::remove
+# memory (MB) bandwidth (GB/s)
+  280      20.1946
+
+# Kokkos: KE::remove
+# memory (MB) bandwidth (GB/s)
+  280      20.5678
+
+# Kokkos: KE::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      95.1355
+
+# Kokkos: KE::remove_copy
+# memory (MB) bandwidth (GB/s)
+  280      95.1434
+
+# Kokkos: KE::find
+# memory (MB) bandwidth (GB/s)
+  280      663.095
+
+# Kokkos: KE::find
+# memory (MB) bandwidth (GB/s)
+  280      644.766
+
+# Kokkos: KE::find
+# memory (MB) bandwidth (GB/s)
+  280      663.523
+
+# Kokkos: KE::find
+# memory (MB) bandwidth (GB/s)
+  280      663.759
